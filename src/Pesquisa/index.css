@@ -1,0 +1,7 @@
+input{
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 40%;
+    transition: all 100ms ease-in-out;
+}

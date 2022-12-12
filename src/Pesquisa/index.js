@@ -9,53 +9,47 @@ import { IoSearch, IoBan, IoAdd, IoReorderTwo } from "react-icons/io5";
 function Pesquisa() {
 
     const [pesquisa, setPesquisa] = useState('')
-    const [arquivos,setArquivo] = useState([
-      {
-        "nome": "Teste",
-        "diretorio": "file:///C:/Users/ianha/Desktop/a/corpus/pf0022pu.htm",
-      },
-      {
-        "nome": "Teste2",
-        "diretorio": "file:///C:/Users/ianha/Desktop/a/corpus/pf0029pu.htm",
+    const [arquivos,setArquivo] = useState()
+
+    async function Pesquisa (event){
+      event.preventDefault();
+      try {
+        const datat = await api.post(`/teste`, {
+            "busca": pesquisa.replace(/ /g, '+'),/* se tiver espaço considera como And */
+          }
+        );
+
+        setArquivo(datat.data.results)
+
+      } catch (error) {
+        console.error(error.response);
       }
-    ])
-
-    async function Pesquisa (){
-        try {
-            const { data } = await api.post(`/`, {
-                "busca": pesquisa.replace(/ /g, '+'),/* se tiver espaço considera como And */
-            }
-          );
-
-          console.log(data);
-          // setPesquisa = data
-
-        } catch (error) {
-          console.error(error.response);
-        }
     }
 
-    function Arquivos() {
+    /*function Arquivos() {
       return (
-        <tr>
+        <>
           {
             arquivos.map((arq)=>{
               return (
-                <label id = {arq.nome}>
+                <div className="Elemento">
 
-                  <h6>{arq.nome}</h6>
+                  <label id = {arq.nome}>
 
-                  <a href = {arq.diretorio} target="_blank">
-                    {arq.diretorio}
-                  </a>
+                    <h6 >{arq.nome}</h6>
 
-                </label>
+                    <a href = {arq.diretorio} >
+                      {arq.diretorio}
+                    </a>
+
+                  </label>
+                </div>
               )
             })
           }
-        </tr>
+        </>
       )
-    }
+    } */
 
     function addAnd() {
         setPesquisa(pesquisa + "+")
@@ -71,8 +65,7 @@ function Pesquisa() {
     <div className="Pesquisa">
       <header className="Pesquisa-header">
         
-        <h1>Busca Booleana</h1>
-
+        <h1 className="Titulo">Busca Booleana</h1>
         <div className="addComand">
             <Button onClick={() => addAnd()}>
                 <IoAdd /* Estilizar o icone tu coloca aqui *//>
@@ -87,21 +80,39 @@ function Pesquisa() {
                 Not / Não
             </Button>
         </div>
+        <form onSubmit={Pesquisa}>
 
-        <div className="campo_pesquisa">
-            <input type="text" 
-                placeholder='Escreva o que deseja perquisar' 
-                value={pesquisa}
-                onChange={select => setPesquisa(select.target.value)}
-            />
+          <div className="campo_pesquisa">
+              <input type="text" 
+                  placeholder='Escreva o que deseja perquisar' 
+                  value={pesquisa}
+                  onChange={select => setPesquisa(select.target.value)}
+              />
 
-            <Button children={<IoSearch/>} onClick={() => Pesquisa()} /* Estilizar o icone tu coloca aqui *//>
-            <p>Utilize os botões para completar com os operadores de pesquisa caso não saiba qual utilizar</p>
-        </div>
+              <Button children={<IoSearch/>} onClick={() => Pesquisa} /* Estilizar o icone tu coloca aqui *//>
+          </div>
+          <p className="descricao">Utilize os botões para completar com os operadores de pesquisa caso não saiba qual utilizar</p>
 
-        <table>
-          {Arquivos()}
-        </table>
+          <div className="Table">
+            {arquivos?.map((arq)=>{
+              return (
+                <div className="Elemento">
+
+                  <label id = {arq.nome}>
+
+                    <h6 >{arq.nome}</h6>
+
+                    <a href = {arq.diretorio}>
+                      {arq.diretorio}
+                    </a>
+
+                    </label>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </form>
 
       </header>
     </div>

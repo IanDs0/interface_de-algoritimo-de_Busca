@@ -1,7 +1,54 @@
 input{
+    
+    align-items: center;
     font-size: 20px;
     padding: 10px;
     border-radius: 10px;
-    width: 40%;
+    width: 75%;
     transition: all 100ms ease-in-out;
+}
+.Titulo{
+    align-items: center;
+    /* margin-left: 36%; */
+    font-size: 40px;
+}
+.campo_pesquisa{
+    display: center;
+    margin-left: 18%;
+
+}
+.descricao{
+    margin-top: 20px;
+    word-wrap: break-word;
+    font-size: 20px;
+    text-align: center;
+    align-items: center;   
+}
+.Table{
+    /* margin-left: 27%; */
+    /* align-items: center; */
+    /* text-align: center; */
+
+    
+    margin-left: 32%;
+    font-size: 20px;
+    padding: 10px;
+    border-color: black;
+    min-width: 50px;
+    transition: all 100ms ease-in-out;
+}
+label{
+    margin-top: 10px;
+    
+}
+.Elemento{
+    float: left;
+    text-align: center;
+    align-items: center;
+    margin-top: 40px; 
+    border-top: solid;
+    border-left: solid;
+    border-radius: 10px;
+    width: 50%;
+    box-shadow: 10px 5px 5px black;
 }

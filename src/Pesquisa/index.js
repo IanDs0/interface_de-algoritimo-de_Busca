@@ -30,7 +30,7 @@ function Pesquisa() {
     <div className="Pesquisa">
       <header className="Pesquisa-header">
         
-        <h1 className="Titulo">Busca Modelo vetorial e ranking</h1>
+        <h1 className="Titulo">Modelo probabilıstico e ranking</h1>
         <form onSubmit={Pesquisa}>
 
           <div className="campo_pesquisa">
